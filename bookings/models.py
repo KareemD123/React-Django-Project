@@ -1,8 +1,4 @@
 from django.db import models
-from django.db.models import Avg
-from users.models import CustomUser
-from phonenumber_field.modelfields import PhoneNumberField
-from django.utils import timezone
 
 STAR_CHOICES = [
     ('1', '⭐'),
