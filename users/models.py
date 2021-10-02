@@ -4,8 +4,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 from .managers import CustomUserManager
-from bookings.models import Reviews
-from django.db.models import Avg
 
 PRICE_CHOICES = [
     ('1', '$'),
@@ -36,7 +34,6 @@ class Address(models.Model):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -69,7 +66,7 @@ class Artist(models.Model):
     instagram_handle = models.CharField(max_length=30)
     tiktok_handle = models.CharField(max_length=30)
     soundcloud_handle = models.CharField(max_length=30)
-    address = models.ForeignKey(Address, related_name="host_address", null=True, blank=True, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, related_name="+", null=True, blank=True, on_delete=models.CASCADE)
     artist_phone_number = PhoneNumberField(null=False, blank=False, unique=True)
     has_own_equipment = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
@@ -77,7 +74,7 @@ class Artist(models.Model):
     artist_objects = ArtistObjects()
 
     class Meta:
-        ordering = '-is_active'
+        ordering = ('user_id',)
 
     def __str__(self):
         return self.artist_name
@@ -89,7 +86,7 @@ class Host(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=False)
     date_activated = models.DateTimeField(auto_now_add=True)
-    host_address = models.ForeignKey(Address, related_name="host_address", null=True, blank=True,
+    host_address = models.ForeignKey(Address, related_name="address", null=True, blank=True,
                                      on_delete=models.CASCADE)
     host_phone_number = PhoneNumberField(null=False, blank=False, unique=True)
     special_instructions = models.TextField(max_length=300)
@@ -98,8 +95,4 @@ class Host(models.Model):
         choices=PRICE_CHOICES
     )
     has_own_equipment = models.BooleanField(default=False)
-
-    def get_avg_rating(self):
-        reviews = Reviews.objects.filter(host=self).aggregate(rating_avg=Avg('stars'))
-        return reviews['rating_avg']
 

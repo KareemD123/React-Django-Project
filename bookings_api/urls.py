@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import PostList, PostDetail
-
+from .views import users_detail, users_list
 app_name = 'bookings_api'
 
 urlpatterns = [
-    path('<int:pk>/', PostDetail.as_view(), name='detailcreate'),
-    path('', PostList.as_view(), name='listcreate'),
+    path('users/', users_list),
+    path('users/<int:pk>', users_detail),
 ]

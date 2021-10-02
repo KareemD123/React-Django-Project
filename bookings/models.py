@@ -1,4 +1,6 @@
 from django.db import models
+from users.models import Host, Artist
+
 
 STAR_CHOICES = [
     ('1', '⭐'),
