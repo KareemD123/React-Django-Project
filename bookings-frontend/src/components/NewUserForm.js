@@ -10,7 +10,6 @@ import { API_URL } from "../constants";
 class NewUserForm extends React.Component {
   state = {
     pk: 0,
-    name: "",
     email: "",
     phone: "",
     first_name: "",
@@ -21,8 +20,8 @@ class NewUserForm extends React.Component {
 
   componentDidMount() {
     if (this.props.user) {
-      const { pk, name, email, phone, first_name, last_name, is_artist, is_host} = this.props.user;
-      this.setState({ pk, name, email, phone, first_name, last_name, is_artist, is_host });
+      const { pk, email, phone, first_name, last_name, is_artist, is_host} = this.props.user;
+      this.setState({ pk, email, phone, first_name, last_name, is_artist, is_host });
     }
   }
 
@@ -54,12 +53,21 @@ class NewUserForm extends React.Component {
     return (
       <Form onSubmit={this.props.user ? this.editUser : this.createUser}>
         <FormGroup>
-          <Label for="name">Name:</Label>
+          <Label for="first_name">First Name:</Label>
           <Input
             type="text"
-            name="name"
+            name="first_name"
             onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.name)}
+            value={this.defaultIfEmpty(this.state.first_name)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="last_name">Last Name:</Label>
+          <Input
+            type="text"
+            name="last_name"
+            onChange={this.onChange}
+            value={this.defaultIfEmpty(this.state.last_name)}
           />
         </FormGroup>
         <FormGroup>
@@ -78,24 +86,6 @@ class NewUserForm extends React.Component {
             name="phone"
             onChange={this.onChange}
             value={this.defaultIfEmpty(this.state.phone)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="first_name">First Name:</Label>
-          <Input
-            type="text"
-            name="first_name"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.first_name)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="last_name">Last Name:</Label>
-          <Input
-            type="text"
-            name="last_name"
-            onChange={this.onChange}
-            value={this.defaultIfEmpty(this.state.last_name)}
           />
         </FormGroup>
         <FormGroup>

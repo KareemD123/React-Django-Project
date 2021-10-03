@@ -33,16 +33,16 @@ class Address(models.Model):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
-    is_staff = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(default=timezone.now)
+    phone = PhoneNumberField(null=False, blank=False, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    phone = PhoneNumberField(null=False, blank=False, unique=True)
-    is_artist = models.BooleanField(default=False)
-    is_host = models.BooleanField(default=False)
+    is_artist = models.BooleanField(default=False, null=False)
+    is_host = models.BooleanField(default=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=False, null=False)
     activated_at = models.DateTimeField(blank=True, null=True)
+    is_staff = models.BooleanField(default=False)
 
     def activate(self):
         self.activated_at = timezone.now()
