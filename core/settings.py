@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'bookings',
     'api',
     'rest_framework',
-    'corsheaders',
     'import_export',
 ]
 
