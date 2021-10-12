@@ -33,14 +33,14 @@ class Address(models.Model):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
-    phone = PhoneNumberField(null=False, blank=False, unique=True)
+    phone = PhoneNumberField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     is_artist = models.BooleanField(default=False, null=False)
     is_host = models.BooleanField(default=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    is_active = models.BooleanField(default=False, null=False)
+    is_active = models.BooleanField(default=True, null=False)
     activated_at = models.DateTimeField(blank=True, null=True)
     is_staff = models.BooleanField(default=False)
 
