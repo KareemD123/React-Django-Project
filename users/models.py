@@ -33,7 +33,7 @@ class Address(models.Model):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
-    phone = PhoneNumberField(unique=True)
+    phone = PhoneNumberField(null=True, unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     is_artist = models.BooleanField(default=False, null=False)
