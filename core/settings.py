@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bookings',
     'users',
     'rest_framework', # new
+    'frontend',
 ]
 
 MIDDLEWARE = [
