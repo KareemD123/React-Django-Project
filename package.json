@@ -4,8 +4,11 @@
   "description": "Create a new folder on your computer to house the project and type: <br>\r git clone https://github.com/KareemD123/React-Django-Project.git\r <br>",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.22.0",
+    "axios": "^0.19.0",
     "bootstrap": "^5.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1",
     "reactstrap": "^8.10.0"
   },
   "devDependencies": {
@@ -17,6 +20,7 @@
     "webpack-cli": "^4.9.0"
   },
   "scripts": {
+    "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
