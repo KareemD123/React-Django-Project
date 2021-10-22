@@ -15,22 +15,6 @@ class Login extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        try {
-            const data = await axiosInstance.post('/token/obtain/', {
-                email: this.state.email,
-                password: this.state.password
-            });
-            axiosInstance.defaults.headers['Authorization'] = "JWT " + data.access;
-            localStorage.setItem('access_token', data.access);
-            localStorage.setItem('refresh_token', data.refresh);
-            return data;
-        } catch (error) {
-            throw error;
-        }
-    }
-
     handleSubmitWThen(event){
         event.preventDefault();
         axiosInstance.post('/token/obtain/', {
@@ -45,6 +29,22 @@ class Login extends Component {
         ).catch (error => {
             throw error;
         })
+    }
+
+    async handleSubmit(event) {
+        event.preventDefault();
+        try {
+            const response = await axiosInstance.post('/token/obtain/', {
+                email: this.state.email,
+                password: this.state.password
+            });
+            axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
+            return response;
+        } catch (error) {
+            throw error;
+        }
     }
 
     render() {

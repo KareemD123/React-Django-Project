@@ -5,7 +5,6 @@ class Signup extends Component{
     constructor(props){
         super(props);
         this.state = {
-            username: "",
             password: "",
             email:"",
             errors:{}
@@ -23,7 +22,6 @@ class Signup extends Component{
         event.preventDefault();
         try {
             const response = await axiosInstance.post('/user/create/', {
-                username: this.state.username,
                 email: this.state.email,
                 password: this.state.password
             });
@@ -41,11 +39,6 @@ class Signup extends Component{
             <div>
                 Signup
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:
-                        <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
-                        { this.state.errors.username ? this.state.errors.username : null}
-                    </label>
                     <label>
                         Email:
                         <input name="email" type="email" value={this.state.email} onChange={this.handleChange}/>
