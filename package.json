@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^5.1.1",
+    "npm-watch": "^0.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
@@ -22,11 +23,20 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm-watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KareemD123/React-Django-Project.git"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js,jsx"
+    }
   },
   "author": "",
   "license": "ISC",

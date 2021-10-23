@@ -19,7 +19,7 @@ class Hello extends Component {
                 message: message,
             });
             return message;
-        }catch(error){
+        } catch(error) {
             console.log("Error: ", JSON.stringify(error, null, 4));
             throw error;
         }
