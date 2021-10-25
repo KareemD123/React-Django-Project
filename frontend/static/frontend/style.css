@@ -8,3 +8,8 @@
     border: 1px solid white;
     padding: 1em;
 }
+
+.button-align{
+    display: 'flex';
+    justify-content: 'flex-end';
+}
