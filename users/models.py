@@ -39,7 +39,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_artist = models.BooleanField(default=False, null=False)
     is_host = models.BooleanField(default=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True, null=False)
     activated_at = models.DateTimeField(blank=True, null=True)
     is_staff = models.BooleanField(default=False)
