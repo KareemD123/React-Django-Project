@@ -2,7 +2,7 @@ import React, { Component} from "react";
 import { Switch, Route, Link } from "react-router-dom"; 
 import Login from "./login";
 import Signup from "./signup";
-import Hello from './hello';
+import ListofUsers from "./listofusers";
 import axiosInstance from "../axiosApi";
 import { BrowserRouter as Router} from "react-router-dom";
 
@@ -35,6 +35,7 @@ class App extends Component {
                     <Link className={"nav-link"} to={"/"}>Home</Link>
                     <Link className={"nav-link"} to={"/login/"}>Login</Link>
                     <Link className={"nav-link"} to={"/signup/"}>Signup</Link>
+                    <Link className={"nav-link"} to={"/users/"}>List of Users</Link>
                     <button className={"button-align"} onClick={this.handleLogout}>Logout</button>
                 </nav>
                 <main>
@@ -43,6 +44,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path={"/login/"} component={Login}/>
                         <Route exact path={"/signup/"} component={Signup}/>
+                        <Route exact path={"/users/"} component={ListofUsers}/>
                         <Route path={"/"} render={() => <div>Home again</div>}/>
                     </Switch>
                 </main>

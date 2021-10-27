@@ -2,6 +2,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import authentication, permissions
+from .models import User
 from rest_framework_simplejwt.tokens import RefreshToken 
 
 from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer
@@ -35,3 +37,21 @@ class LogoutAndBlacklistRefreshTokenForUserView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class ListUsers(APIView):
+    """
+    View to list all users in the system.
+
+    * Requires token authentication.
+    * Only admin users are able to access this view.
+    """
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
+
+    def get(self, request, format=None):
+        """
+        Return a list of all users.
+        """
+        users = User.objects.all()
+        serializer = CustomUserSerializer(users, many=True)
+        return Response(serializer.data)
