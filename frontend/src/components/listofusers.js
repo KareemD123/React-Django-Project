@@ -7,19 +7,18 @@ class ListofUsers extends Component {
     constructor() {
         super();
         this.state = {
-            users: ""
+            users: []
         };
     }
 
     componentDidMount() {
         axiosInstance.get('user/list/', {
           })
-          .then(function (response) {
+          .then(response => {
             console.log(response.data)
             this.setState({
-                users: response.data 
+                users: response.data
             })
-            console.log(this.state.users)
           }).catch(error => {
               console.log(error)
           })
@@ -27,14 +26,32 @@ class ListofUsers extends Component {
 
     render(){
         return (
-            <div>
-                <h1>{this.state.users}</h1>
+            <div className="app-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Is Active</th>
+                            <th>Is Host</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.users.map((user) =>(
+                            <tr>
+                                <td>{user.first_name}</td>
+                                <td>{user.last_name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.is_active}</td>
+                                <td>{user.is_host}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         );
         }
 };
 
 export default ListofUsers;
-
-
-
