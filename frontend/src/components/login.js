@@ -49,19 +49,19 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                Login
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Email:
-                        <input name="email" type="text" value={this.state.email} onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Password:
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="Submit"/>
-                </form>
+            <div className="login">
+                <div className="grandParentContainer">
+                    <div className="parentContainer">
+                        <form onSubmit={this.handleSubmit} className="loginForm">
+                            <span className="material-icons">velify</span>
+                                <input name="email" placeholder="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" value={this.state.email} onChange={this.handleChange}/>
+                                <input name="password" type="password" placeholder="password" value={this.state.password} onChange={this.handleChange}/>
+                            <div>
+                                <input type="submit" value="Submit"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         )
     }

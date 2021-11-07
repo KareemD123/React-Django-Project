@@ -1,8 +1,12 @@
-#root{
-    background-color:#337899bd;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import "compass/css3";
+
+.container{
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
     color:white;
     height: 100vh;
     display: grid; 
+    box-shadow: -2px -2px 5px white,2px -2px 5px;
     grid-template-columns: 1fr 1fr 1fr; 
     grid-template-rows: 0.4fr 1.6fr 1.5fr 0.5fr; 
     gap: 0px 0px; 
@@ -11,6 +15,38 @@
       "main_header main_header main_header"
       "left_column middle_column right_column"
       "footer footer footer"; 
+}
+
+.table-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rwd-table {
+    margin: 1em 0;
+    min-width: 300px; 
+    background: #34495E;
+    color: #fff;
+    border-radius: .4em;
+    overflow: hidden;
+    font-family: 'Comfortaa';
+    text-align: center;
+}
+
+thead {
+    background-color: #dbdbdb;
+}
+    
+tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+    
+th, td {
+    padding: .25em .5em;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .navbar { grid-area: navbar; grid-column-end: span 3; }
@@ -33,15 +69,82 @@
     justify-content: 'flex-end';
 }
 
-.container{
-    position:relative;
-    width:80%;
-    margin:1% auto;
-    background-color:#1c5576;
-    box-shadow: -2px -2px 5px white,2px -2px 5px 
-}
-
 .header {
     justify-content: center;
     display: flex;
+}
+
+.grandParentContainer {
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.parentContainer {
+    display: table-cell;
+    vertical-align: middle; 
+}
+
+.loginForm {
+    width: 300px;
+}
+
+.login {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+    font-family: 'Comfortaa', cursive;
+}
+
+.loginForm {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    border-radius: 10px;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+}
+
+.loginForm input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.loginForm input:focus {
+    background: #dbdbdb;
+  }
+  
+.loginForm button {
+    font-family: 'Comfortaa', cursive;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4b6cb7;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.loginForm button:active {
+    background: #395591;
+}
+
+.loginForm span {
+    font-size: 75px;
+    color: #4b6cb7;
 }

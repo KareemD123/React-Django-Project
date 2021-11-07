@@ -26,8 +26,8 @@ class ListofUsers extends Component {
 
     render(){
         return (
-            <div className="app-container">
-                <table>
+            <div className="table-div">
+                <table className="rwd-table">
                     <thead>
                         <tr>
                             <th>First Name</th>
@@ -38,7 +38,7 @@ class ListofUsers extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.users.map((user) =>(
+                        {this.state.users.slice(2,10).map((user) =>(
                             <tr>
                                 <td>{user.first_name}</td>
                                 <td>{user.last_name}</td>

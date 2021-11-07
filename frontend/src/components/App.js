@@ -30,23 +30,22 @@ class App extends Component {
 
     render() {
         return (
-            <div className='navbar'>
-                <div className='header'>
+            <div className='container'>
+                <div className='navbar'>
                     <Link className={"nav-link"} to={"/"}>Home</Link>
                     <Link className={"nav-link"} to={"/login/"}>Login</Link>
                     <Link className={"nav-link"} to={"/signup/"}>Signup</Link>
                     <Link className={"nav-link"} to={"/users/"}>List of Users</Link>
                     <button className={"button-align"} onClick={this.handleLogout}>Logout</button>
+                </div>
+                <div className='main_header'>
                     <Switch>
                         <Route exact path={"/login/"} component={Login}/>
                         <Route exact path={"/signup/"} component={Signup}/>
                         <Route exact path={"/users/"} component={ListofUsers}/>
                     </Switch>
                 </div>
-                <main>
-                </main>
             </div>
-            
         );
     }
 }

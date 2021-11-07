@@ -36,24 +36,24 @@ class Signup extends Component{
 
     render() {
         return (
-            <div>
-                Signup
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Email:
-                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange}/>
-                        { this.state.errors.email ? this.state.errors.email : null}
-                    </label>
-                    <label>
-                        Password:
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
-                        { this.state.errors.password ? this.state.errors.password : null}
-                    </label>
-                    <input type="submit" value="Submit"/>
-                </form>
+            <div className="login">
+                <div className="grandParentContainer">
+                    <div className="parentContainer">
+                        <form onSubmit={this.handleSubmit} className="loginForm">
+                            <span className="material-icons">velify</span>
+                            <input name="email" placeholder='email' type="email" value={this.state.email} onChange={this.handleChange}/> { this.state.errors.email ? this.state.errors.email : null}
+                            <input name="password" placeholder='password' type="password" value={this.state.password} onChange={this.handleChange}/> { this.state.errors.password ? this.state.errors.password : null}
+                            <input name="password" placeholder='please enter password again' type="password" value={this.state.password} onChange={this.handleChange}/> { this.state.errors.password ? this.state.errors.password : null}
+                            <div>
+                                <input type="submit" value="Submit"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 export default Signup;
+
