@@ -148,3 +148,18 @@ th, td {
     font-size: 75px;
     color: #4b6cb7;
 }
+
+.radioContainer {
+    font-family: 'Comfortaa', cursive;
+    margin-bottom: 15px;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    color: black;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    outline: #182848;
+}

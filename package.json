@@ -4,15 +4,20 @@
   "description": "Create a new folder on your computer to house the project and type: <br>\r git clone https://github.com/KareemD123/React-Django-Project.git\r <br>",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.24.0",
-    "bootstrap": "^5.1.3",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "country-state-city": "^2.0.0",
+    "framer-motion": "^3.7.0",
+    "node-sass": "^4.14.1",
     "npm-watch": "^0.11.0",
     "react": "^16.14.0",
-    "react-bootstrap": "^2.0.0",
+    "react-bootstrap": "^1.5.0",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
+    "react-hook-form": "^6.15.4",
+    "react-router-dom": "^5.2.0",
     "react-table": "^7.7.0",
-    "reactstrap": "^8.10.0"
+    "reactstrap": "^8.10.0",
+    "sweetalert2": "^10.15.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

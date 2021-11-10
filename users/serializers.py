@@ -35,7 +35,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
                 'last_name',
                 'is_artist',
                 'is_host',
-                'is_active'
                 )
         extra_kwargs = {'password': {'write_only': True}}
 
