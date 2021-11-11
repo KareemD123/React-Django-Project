@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axiosInstance from "../axiosApi";
 
 class Signup extends Component{
@@ -11,7 +12,8 @@ class Signup extends Component{
             last_name:"",
             is_artist: false,
             is_host: false,
-            errors: {}
+            errors: {},
+            redirect: "/"
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -20,6 +22,12 @@ class Signup extends Component{
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
+    }
+
+    radioButton(event) {
+        this.setState({
+            event.target.value: this.value = !this.value
+         });
     }
 
     async handleSubmit(event) {
@@ -35,7 +43,7 @@ class Signup extends Component{
                 is_host: this.state.is_host
             });
             console.log(response)
-            return response;
+            return <Redirect to={this.state.redirect} />
         } catch (error) {
             console.log(error.stack);
             this.setState({
@@ -75,7 +83,6 @@ class Signup extends Component{
                                     name="is_artist"
                                     onChange={this.handleChange}
                                     value={this.state.is_artist}
-                                    checked ={value == true} 
                                     />
                                 <p>I have a venue to rent</p>
                                 <input 
@@ -83,7 +90,6 @@ class Signup extends Component{
                                     name="is_host"
                                     onChange={this.handleChange}
                                     value={this.state.is_host}
-                                    checked ={value == true} 
                                     />
                             </div>
                             <input name="password" placeholder='Password' type="password" value={this.state.password} onChange={this.handleChange}/> { this.state.errors.password ? this.state.errors.password : null}
