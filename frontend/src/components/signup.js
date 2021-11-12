@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 import axiosInstance from "../axiosApi";
 
 class Signup extends Component{
@@ -24,12 +24,6 @@ class Signup extends Component{
         this.setState({[event.target.name]: event.target.value});
     }
 
-    radioButton(event) {
-        this.setState({
-            event.target.value: this.value = !this.value
-         });
-    }
-
     async handleSubmit(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -43,7 +37,7 @@ class Signup extends Component{
                 is_host: this.state.is_host
             });
             console.log(response)
-            return <Redirect to={this.state.redirect} />
+            this.props.history.push('/');
         } catch (error) {
             console.log(error.stack);
             this.setState({
