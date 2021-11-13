@@ -2,7 +2,7 @@
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import User
+from .models import User, Host
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -43,5 +43,32 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
         if password is not None:
             instance.set_password(password)
+        instance.save()
+        return instance
+    
+class CustomHostSerializer(serializers.ModelSerializer):
+    """
+    Currently unused in preference of the below.
+    """
+    
+
+    class Meta:
+        model = Host
+        fields = (
+            'user_id',
+            'host_name',
+            'total_space',
+            'date_joined',
+            'is_active',
+            'date_activated',
+            'host_address',
+            'host_phone_number',
+            'special_instructions',
+            'price_rating',
+            'has_own_equipment'
+                )
+
+    def create(self, validated_data):
+        instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
         instance.save()
         return instance
