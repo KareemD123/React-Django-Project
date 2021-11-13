@@ -6,7 +6,7 @@ from rest_framework import authentication, permissions
 from .models import User
 from rest_framework_simplejwt.tokens import RefreshToken 
 
-from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, CustomHostSerializer
+from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer, CustomHostSerializer, CustomAddressSerializer
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
@@ -56,12 +56,26 @@ class ListUsers(APIView):
         serializer = CustomUserSerializer(users, many=True)
         return Response(serializer.data)
     
+class CustomAddressCreate(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request, format='json'):
+        serializer = CustomAddressSerializer(data=request.data, many=True)
+        if serializer.is_valid():
+            address = serializer.save()
+            if address:
+                json = serializer.data
+                return Response(json, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
 class CustomHostCreate(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = ()
 
     def post(self, request, format='json'):
-        serializer = CustomHostSerializer(data=request.data)
+        serializer = CustomHostSerializer(data=request.data, many=True)
         if serializer.is_valid():
             host = serializer.save()
             if host:

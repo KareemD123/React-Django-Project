@@ -2,7 +2,7 @@
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-from .models import User, Host
+from .models import User, Host, Address
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -46,6 +46,23 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     
+class CustomAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = (
+            'address_line_1',
+            'address_line_2',
+            'city',
+            'country',
+            'state',
+            'zip_code',
+                )
+
+    def create(self, validated_data):
+        instance = self.Meta.model(**validated_data)  
+        instance.save()
+        return instance
+
 class CustomHostSerializer(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
@@ -72,3 +89,5 @@ class CustomHostSerializer(serializers.ModelSerializer):
         instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
         instance.save()
         return instance
+    
+
