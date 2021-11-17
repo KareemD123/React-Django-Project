@@ -24,7 +24,13 @@ class CustomUserAdmin(UserAdmin):
     ordering = ('email',)
 
 
-admin.site.register(User, CustomUserAdmin)
-admin.site.register(Host)
-admin.site.register(Address)
+@admin.register(Host)
+class HostAdmin(admin.ModelAdmin):
+    list_display = ('host_name', 'date_joined', 'host_phone_number')
+    
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ('address_line_1', 'city', 'country')
 
+
+admin.site.register(User, CustomUserAdmin)

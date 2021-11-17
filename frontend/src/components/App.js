@@ -2,9 +2,11 @@ import React, { Component} from "react";
 import { Switch, Route, Link } from "react-router-dom"; 
 import Login from "./login";
 import Signup from "./signup";
+import CreateHost from "./createhost";
 import ListofUsers from "./listofusers";
 import axiosInstance from "../axiosApi";
 import { BrowserRouter as Router} from "react-router-dom";
+
 
 class App extends Component {
         constructor() {
@@ -43,6 +45,7 @@ class App extends Component {
                         <Route exact path={"/login/"} component={Login}/>
                         <Route exact path={"/signup/"} component={Signup}/>
                         <Route exact path={"/users/"} component={ListofUsers}/>
+                        <Route exact path={"/create/host"} component={CreateHost}/>
                     </Switch>
                 </div>
             </div>
