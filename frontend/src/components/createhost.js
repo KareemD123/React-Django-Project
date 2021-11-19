@@ -1,19 +1,21 @@
 import React, { Component } from "react";
-import { Controller, useForm } from "react-hook-form";
 import axiosInstance from "../axiosApi";
 
 class Signup extends Component{
     constructor(props){
         super(props);
         this.state = {
-            password: "",
-            email:"",
-            first_name:"",
-            last_name:"",
-            is_artist: false,
-            is_host: false,
-            errors: {},
-            redirect: "/"
+            user_id: {user},
+            host_name: "",
+            total_space: "",
+            date_joined: "",
+            is_active: "",
+            date_activated: "",
+            host_address: "",
+            host_phone_number: "",
+            special_instructions: "",
+            price_rating: "",
+            has_own_equipment: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
