@@ -38,6 +38,7 @@ class App extends Component {
                     <Link className={"nav-link"} to={"/login/"}>Login</Link>
                     <Link className={"nav-link"} to={"/signup/"}>Signup</Link>
                     <Link className={"nav-link"} to={"/users/"}>List of Users</Link>
+                    <Link className={"nav-link"} to={"/create/host"}>Create a Host</Link>
                     <button className={"button-align"} onClick={this.handleLogout}>Logout</button>
                 </div>
                 <div className='main_header'>

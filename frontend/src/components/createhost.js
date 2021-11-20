@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
 
-class Signup extends Component{
+class CreateHost extends Component{
     constructor(props){
         super(props);
         this.state = {
-            user_id: {user},
-            host_name: "",
+            host_name: '',
             total_space: "",
             date_joined: "",
             is_active: "",
@@ -31,12 +30,16 @@ class Signup extends Component{
         event.stopPropagation();
         try {
             const response = await axiosInstance.post('/user/create/', {
-                email: this.state.email,
-                password: this.state.password,
-                first_name: this.state.first_name,
-                last_name: this.state.last_name,
-                is_artist: this.state.is_artist,
-                is_host: this.state.is_host
+                host_name: this.state.host_name,
+                total_space: this.state.total_space,
+                date_joined: this.state.date_joined,
+                is_active: this.state.is_active,
+                date_activated: this.state.date_activated,
+                host_address: this.state.host_address,
+                host_phone_number: this.state.host_phone_number,
+                special_instructions: this.state.special_instructions,
+                price_rating: this.state.price_rating,
+                has_own_equipment: this.state.has_own_equipment,
             });
             console.log(response)
             this.props.history.push('/');
@@ -55,40 +58,11 @@ class Signup extends Component{
                     <div className="parentContainer">
                         <form onSubmit={this.handleSubmit} className="loginForm">
                             <span className="material-icons">velify</span>
-                            <input name="email" 
-                                   placeholder='Email' 
-                                   type="email" 
-                                   value={this.state.email} 
-                                   onChange={this.handleChange}/> { this.state.errors.email ? this.state.errors.email : null}
-                            <input 
-                                    name="first_name" 
-                                    placeholder='First Name' 
-                                    type="text" 
-                                    value={this.state.first_name} 
-                                    onChange={this.handleChange}/> { this.state.errors.first_name ? this.state.errors.first_name : null}
-                            <input 
-                                    name="last_name" 
-                                    placeholder='Last Name' 
-                                    type="text" 
-                                    value={this.state.last_name} 
-                                    onChange={this.handleChange}/> { this.state.errors.last_name ? this.state.errors.last_name : null}
-                            <div className="radioContainer">
-                                <p>I'd like to find a venue to play</p>
-                                <input 
-                                    type="radio" 
-                                    name="is_artist"
-                                    onChange={this.handleChange}
-                                    value={this.state.is_artist}
-                                    />
-                                <p>I have a venue to rent</p>
-                                <input 
-                                    type="radio" 
-                                    name="is_host"
-                                    onChange={this.handleChange}
-                                    value={this.state.is_host}
-                                    />
-                            </div>
-                            <input name="password" placeholder='Password' type="password" value={this.state.password} onChange={this.handleChange}/> { this.state.errors.password ? this.state.errors.password : null}
+                            <input name="host_name" 
+                                   placeholder='Host Name' 
+                                   type="text" 
+                                   value={this.state.host_name} 
+                                   onChange={this.handleChange}/> { this.state.errors.host_name ? this.state.errors.host_name : null}
                             <div>
                                 <input type="submit" value="Submit"/>
                             </div>
@@ -100,5 +74,5 @@ class Signup extends Component{
     }
 }
 
-export default Signup;
+export default CreateHost;
 
