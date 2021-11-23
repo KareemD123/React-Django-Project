@@ -1,5 +1,3 @@
-#Following tutorial here: https://hackernoon.com/110percent-complete-jwt-authentication-with-django-and-react-2020-iejq34ta
-
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from .models import User, Host, Address
@@ -64,10 +62,7 @@ class CustomAddressSerializer(serializers.ModelSerializer):
         return instance
 
 class CustomHostSerializer(serializers.ModelSerializer):
-    """
-    Currently unused in preference of the below.
-    """
-    
+    host_address = CustomAddressSerializer()
 
     class Meta:
         model = Host

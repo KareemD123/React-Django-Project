@@ -10,6 +10,11 @@ class CreateHost extends Component{
             date_joined: "",
             is_active: "",
             date_activated: "",
+            address_line_1: "",
+            address_line_2: "",
+            city: "",
+            country: "",
+            state: "",
             host_address: "",
             host_phone_number: "",
             special_instructions: "",
@@ -29,7 +34,23 @@ class CreateHost extends Component{
         event.preventDefault();
         event.stopPropagation();
         try {
-            const response = await axiosInstance.post('/user/create/', {
+            const response = await axiosInstance.post('users/address/create', {
+                address_line_1: this.state.address_line_1,
+                address_line_2: this.state.address_line_2,
+                city: this.state.city, 
+                country: this.state.country,
+                state: this.state.state,
+            });
+            console.log(response)
+            host_address = response.data.key 
+        } catch(error) {
+            console.log(error.stack);
+            this.setState({
+                errors:error.response.data
+            });
+        }
+        try {
+            const response = await axiosInstance.post('users/host/create', {
                 host_name: this.state.host_name,
                 total_space: this.state.total_space,
                 date_joined: this.state.date_joined,
@@ -56,13 +77,53 @@ class CreateHost extends Component{
             <div className="login">
                 <div className="grandParentContainer">
                     <div className="parentContainer">
-                        <form onSubmit={this.handleSubmit} className="loginForm">
-                            <span className="material-icons">velify</span>
+                        <form onSubmit={this.handleSubmit} className="createHostForm">
+                            <span className="material-icons">Become a host</span>
                             <input name="host_name" 
                                    placeholder='Host Name' 
                                    type="text" 
                                    value={this.state.host_name} 
-                                   onChange={this.handleChange}/> { this.state.errors.host_name ? this.state.errors.host_name : null}
+                                   onChange={this.handleChange}/>
+                            <input name="total_space" 
+                                   placeholder='Total Space' 
+                                   type="number" 
+                                   value={this.state.total_space} 
+                                   onChange={this.handleChange}/>
+                            <input name="address_line_1" 
+                                   placeholder='Address Line 1' 
+                                   type="text" 
+                                   value={this.state.address_line_1} 
+                                   onChange={this.handleChange}/>
+                            <input name="address_line_2" 
+                                   placeholder='Address Line 2' 
+                                   type="text" 
+                                   value={this.state.address_line_2} 
+                                   onChange={this.handleChange}/>
+                            <input name="city" 
+                                   placeholder='City' 
+                                   type="text" 
+                                   value={this.state.city} 
+                                   onChange={this.handleChange}/>
+                            <input name="country" 
+                                   placeholder='Country' 
+                                   type="text" 
+                                   value={this.state.country} 
+                                   onChange={this.handleChange}/>        
+                            <input name="state" 
+                                   placeholder='State' 
+                                   type="text" 
+                                   value={this.state.state} 
+                                   onChange={this.handleChange}/>                                                                                                                                                                                                                         
+                            <input name="zip_code" 
+                                   placeholder='Zipcode' 
+                                   type="number" 
+                                   value={this.state.zip_code} 
+                                   onChange={this.handleChange}/>
+                            <input name="special_instructions" 
+                                   placeholder='Special Instructions' 
+                                   type="text" 
+                                   value={this.state.special_instructions} 
+                                   onChange={this.handleChange}/>                                                                  
                             <div>
                                 <input type="submit" value="Submit"/>
                             </div>
@@ -75,4 +136,3 @@ class CreateHost extends Component{
 }
 
 export default CreateHost;
-
