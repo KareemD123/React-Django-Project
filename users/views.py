@@ -61,7 +61,7 @@ class CustomAddressCreate(APIView):
     authentication_classes = ()
 
     def post(self, request, format='json'):
-        serializer = CustomAddressSerializer(data=request.data, many=True)
+        serializer = CustomAddressSerializer(data=request.data)
         if serializer.is_valid():
             address = serializer.save()
             if address:
@@ -75,7 +75,7 @@ class CustomHostCreate(APIView):
     authentication_classes = ()
 
     def post(self, request, format='json'):
-        serializer = CustomHostSerializer(data=request.data, many=True)
+        serializer = CustomHostSerializer(data=request.data)
         if serializer.is_valid():
             host = serializer.save()
             if host:

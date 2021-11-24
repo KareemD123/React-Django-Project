@@ -1,1 +1,7 @@
-asdasdas
+[DONE] 1/ fix the issue with host_name in the state variable [fixed]
+- fix posting data with address and host 
+- once fixed, build a new component for getting host data
+- create a search function to pull the data 
+- create table in react to show 
+- only let authenticated users see the data 
+
