@@ -1,148 +1,172 @@
 import React, { Component } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import axiosInstance from "../axiosApi";
 
-class CreateHost extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            address_line_1: "",
-            address_line_2: "",
-            city: "",
-            country: "",
-            state: "",
-            zip_code: "",            
+
+export default function CreateHost() {
+    const [page, setPage] = useState(1);
+    const [toggle, setToggle] = useState(false)
+    const [data, setData] = useState({
+        address: {
+            id:'',
+            address_line_1: '',
+            address_line_2: '',
+            zip_code: '',
+            city: '',
+            country: '',
+            state: '',
+        },
+        host: {
             host_name: '',
-            total_space: "",
-            host_address: "",
-            host_phone_number: "",
-            special_instructions: "",
-            price_rating: 0,
-            has_own_equipment: true,
+            total_space: '',
+            host_address: '',
+            host_phone_number: '',
+            special_instructions: '',
+            price_rating: '',
+            has_own_equipment: '',
+        }
+    });
+
+    function goNextPage() {
+        if (page == 2) return;
+        setPage(page => page + 1)
+    }
+
+    function handleClick() {
+            setData(data => {
+
+            })
         };
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
-    }
-
-    handleClick() {
-        this.setState(prevState => ({
-            has_own_equipment: !prevState.hasOwnEquipment == false ? true : false
-        }));
-        console.log(this.state.has_own_equipment)
-    };
-
-    async handleSubmit(event) {
-        event.preventDefault();
-        event.stopPropagation();
+    async function submitAddress(addressData) {
         try {
             const response = await axiosInstance.post('users/address/create', {
-                address_line_1: this.state.address_line_1,
-                address_line_2: this.state.address_line_2,
-                zip_code: this.state.address_line_2,
-                city: this.state.city, 
-                country: this.state.country,
-                state: this.state.state,
+                address_line_1: data.address.address_line_1,
+                address_line_2: data.address.address_line_2,
+                zip_code: data.address.zip_code,
+                city: data.address.city,
+                country: data.address.country,
+                state: data.address.state,
             });
             console.log(response)
-            host_address = response.data.key 
-        } catch(error) {
+            setData(data.address['id'] = response.data.id)
+        } catch (error) {
             console.log(error.stack);
             this.setState({
                 errors:error.response.data
             });
         }
-        // try {
-        //     const response = await axiosInstance.post('users/host/create', {
-        //         host_name: this.state.host_name,
-        //         total_space: this.state.total_space,
-        //         host_address: this.state.host_address,
-        //         host_phone_number: this.state.host_phone_number,
-        //         special_instructions: this.state.special_instructions,
-        //         price_rating: this.state.price_rating,
-        //         has_own_equipment: this.state.has_own_equipment,
-        //     });
-        //     console.log(response)
-        //     this.props.history.push('/');
-        // } catch (error) {
-        //     console.log(error.stack);
-        //     this.setState({
-        //         errors:error.response.data
-        //     });
-        // }
     }
+    async function submitHost(hostData) {
+        try {
+            const response = await axiosInstance.post('users/host/create', {
+                host_name: data.host.host_name,
+                total_space: data.host.total_space,
+                host_address: data.address.id,
+                host_phone_number: data.host.host_phone_number,
+                special_instructions: data.host.special_instructions,
+                price_rating: data.host.price_rating,
+                has_own_equipment: data.host.has_own_equipment,
+            });
+            console.log(response)
+            this.props.history.push('/');
+        } catch (error) {
+            console.log(error.stack);
+            this.setState({
+                errors:error.response.data
+            });
+        }
+    } 
+   
+    return (
+        <div className="login">
+            {/* {Progress bar goes here} */}
+            <p>Login form here</p>
 
-    render() {
-        return (
-            <div className="login">
-                <div className="grandParentContainer">
-                    <div className="parentContainer">
-                        <form onSubmit={this.handleSubmit} className="createHostForm">
-                            <span className="material-icons">Become a host</span>
-                            <input name="host_name" 
-                                   placeholder='Host Name' 
-                                   type="text" 
-                                   value={this.state.host_name} 
-                                   onChange={this.handleChange}/>
-                            <input name="total_space" 
-                                   placeholder='Total Space' 
-                                   type="number" 
-                                   value={this.state.total_space} 
-                                   onChange={this.handleChange}/>
-                            <input name="address_line_1" 
-                                   placeholder='Address Line 1' 
-                                   type="text" 
-                                   value={this.state.address_line_1} 
-                                   onChange={this.handleChange}/>
-                            <input name="address_line_2" 
-                                   placeholder='Address Line 2' 
-                                   type="text" 
-                                   value={this.state.address_line_2} 
-                                   onChange={this.handleChange}/>
-                            <input name="city" 
-                                   placeholder='City' 
-                                   type="text" 
-                                   value={this.state.city} 
-                                   onChange={this.handleChange}/>
-                            <input name="country" 
-                                   placeholder='Country' 
-                                   type="text" 
-                                   value={this.state.country} 
-                                   onChange={this.handleChange}/>        
-                            <input name="state" 
-                                   placeholder='State' 
-                                   type="text" 
-                                   value={this.state.state} 
-                                   onChange={this.handleChange}/>                                                                                                                                                                                                                         
-                            <input name="zip_code" 
-                                   placeholder='Zipcode' 
-                                   type="number" 
-                                   value={this.state.zip_code} 
-                                   onChange={this.handleChange}/>
-                            <input name="special_instructions" 
-                                   placeholder='Special Instructions' 
-                                   type="text" 
-                                   value={this.state.special_instructions} 
-                                   onChange={this.handleChange}/>   
-                            <input name="has_own_equipment" 
-                                   placeholder='Has Own Equipment' 
-                                   type="button" 
-                                   value={this.state.has_own_equipment} 
-                                   onClick={this.handleClick}/>                             
-                            <div>
-                                <input type="submit" value="Submit"/>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+            {page !== 2 && <button onClick={goNextPage}>Go Next</button>}
+            {page == 2 && <button type='submit'>Go Next</button>}
+
+
+            {/* {Content goes here} */}
+            {page == 1 && <OnboardingAddress/>}
+            {page == 2 && <OnboardingHost/>}
+        </div>
+    );
 }
 
-export default CreateHost;
+function OnboardingAddress() {
+    return (
+        <div className="grandParentContainer">
+            <div className="parentContainer">
+                <form onSubmit={() => submitAddress()} className="createHostForm">
+                    <span className="material-icons">Become a host</span>
+                    <input name="address_line_1" 
+                        placeholder='Address Line 1' 
+                        type="text" 
+                        value={data.address.address_line_1}/>
+                    <input name="address_line_2" 
+                        placeholder='Address Line 2' 
+                        type="text" 
+                        value={data.address.address_line_2}/>
+                    <input name="city" 
+                        placeholder='City' 
+                        type="text" 
+                        value={data.address.city}/>
+                    <input name="country" 
+                        placeholder='Country' 
+                        type="text" 
+                        value={data.address.country}/>        
+                    <input name="state" 
+                        placeholder='State' 
+                        type="text" 
+                        value={data.address.state}/>                                                                                                                                                                                                                         
+                    <input name="zip_code" 
+                        placeholder='Zipcode' 
+                        type="number" 
+                        value={data.address.zip_code}/>                          
+                    <div>
+                        <input onClick={goNextPage} type="submit" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+}
+
+function OnboardingHost() {
+    return (
+        <div className="grandParentContainer">
+            <div className="parentContainer">
+                <form onSubmit={() => submitHost()} className="createHostForm">
+                    <span className="material-icons">Become a host</span>
+                <input name="host_name" 
+                    placeholder='Host Name' 
+                    type="text" 
+                    value={data.host.host_name}/>
+                <input name="total_space" 
+                    placeholder='Total Space' 
+                    type="number" 
+                    value={data.host.total_space}/>
+                <input name="phone_number" 
+                    placeholder='Phone Number' 
+                    type="tel" 
+                    value={data.host.phone_number}/>                       
+                <input name="special_instructions" 
+                    placeholder='Special Instructions' 
+                    type="text" 
+                    value={data.host.special_instructions}/>   
+                <input name="has_own_equipment" 
+                    placeholder='Has Own Equipment' 
+                    type="button" 
+                    value={data.host.has_own_equipment}
+                    onClick={() => setToggle(!toggle)}
+                    />      
+                <div>
+                    <input onClick={() => submitAddress()} type="submit" value="Submit"/>
+                </div>
+                </form>
+            </div>
+        </div>
+    )
+}

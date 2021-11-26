@@ -66,6 +66,7 @@ class CustomAddressCreate(APIView):
             address = serializer.save()
             if address:
                 json = serializer.data
+                json['id'] = address.pk
                 return Response(json, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -78,6 +79,7 @@ class CustomHostCreate(APIView):
         serializer = CustomHostSerializer(data=request.data)
         if serializer.is_valid():
             host = serializer.save()
+            host[id] = serializer.pk
             if host:
                 json = serializer.data
                 return Response(json, status=status.HTTP_201_CREATED)
